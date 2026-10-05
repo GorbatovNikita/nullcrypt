@@ -2,6 +2,7 @@
 
 #include "levels.h"
 #include "errors.h"
+#include "utils.h"
 
 
 /*
@@ -27,4 +28,28 @@ GameMode *get_game_mode(int difficulty, char *title)
     mode->multiplier = 0.5 * difficulty;
 
     return mode;
+}
+
+int *get_levelmap_data(GameMode difficulty)
+{
+    int length = difficulty.clear_rooms_quantity + difficulty.encounters_quantity + difficulty.treasures_quantity;
+    int *levelmap_data = malloc(sizeof(int) * length);
+
+
+    for(int enc_idx = 0; enc_idx < difficulty.encounters_quantity; enc_idx ++)
+    {
+        levelmap_data[enc_idx] = ENCOUNTER;
+    }
+    for(int trs_idx = difficulty.encounters_quantity; trs_idx < (difficulty.treasures_quantity + difficulty.encounters_quantity); trs_idx ++)
+    {
+        levelmap_data[trs_idx] = TREASURE;
+    }
+    for(int clear_idx = difficulty.encounters_quantity + difficulty.treasures_quantity; clear_idx < length; clear_idx++)
+    {
+        levelmap_data[clear_idx] = CLEAR;
+    }
+
+    shuffle(levelmap_data, length);
+
+    return levelmap_data;
 }
