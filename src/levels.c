@@ -30,7 +30,7 @@ GameMode *get_game_mode(int difficulty, char *title)
     return mode;
 }
 
-int *get_levelmap_data(GameMode difficulty)
+int *_get_levelmap_data(GameMode difficulty)
 {
     int length = difficulty.clear_rooms_quantity + difficulty.encounters_quantity + difficulty.treasures_quantity;
     int *levelmap_data = malloc(sizeof(int) * length);
@@ -52,4 +52,28 @@ int *get_levelmap_data(GameMode difficulty)
     shuffle(levelmap_data, length);
 
     return levelmap_data;
+}
+
+Level *generate_map(GameMode *difficulty)
+{
+    int length = difficulty->length;
+    int *levelmap_data = _get_levelmap_data(*difficulty);
+    
+    Level *start_node = malloc(sizeof(Level));
+    Level *current_node = start_node;
+
+    for(int i = 0; i < length; i++)
+    {
+        current_node->type = levelmap_data[i];
+        
+        Level *new_node = malloc(sizeof(Level));
+        current_node->next_level = new_node;
+
+        current_node = new_node;
+    }
+    current_node->next_level = NULL;
+
+    free(levelmap_data);
+
+    return start_node;
 }
