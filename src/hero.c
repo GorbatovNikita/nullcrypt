@@ -5,7 +5,7 @@
 #include <string.h>
 
 
-int set_hero(Hero *hero, char name[11], HeroClass hero_class, int level)
+int set_hero(Hero *hero, char name[11], HeroClass hero_class, int level, int experience)
 {
     if(!name)
     {
@@ -22,6 +22,7 @@ int set_hero(Hero *hero, char name[11], HeroClass hero_class, int level)
 
     hero->hero_class = hero_class;
     hero->level = level;
+    hero->experience = experience;
 
     if(hero_class == MAGE)
     {

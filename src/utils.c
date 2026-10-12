@@ -16,11 +16,7 @@ void shuffle(int *array, int size)
     }
 }
 
-short int verify_chance(int dropped_value, int chance)
+short int roll_dice()
 {
-    if(dropped_value <= chance)
-    {
-        return 1;
-    }
-    return 0;
+    return rand() % 16 + 1;
 }

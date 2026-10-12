@@ -38,6 +38,7 @@ typedef struct Hero
     int strength;
     int agility;
     int health;
+    int experience;
     int load_capacity;
     Item *item_list;
 } Hero;

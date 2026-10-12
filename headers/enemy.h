@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #define ENEMY_TYPE_AMOUNT 4
+#define ENEMY_LEVEL_MODIFIER 0.25
 
 #include "hero.h"
 
@@ -16,10 +17,9 @@ typedef enum Type
 typedef struct EnemyType
 {
     Type type;
-    int strength;
-    int agility;
-    int health;
-    int level_modifier;
+    float strength;
+    float agility;
+    float health;
 } EnemyType;
 
 typedef struct Enemy
