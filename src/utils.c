@@ -15,3 +15,12 @@ void shuffle(int *array, int size)
         array[rand_idx] = temp;
     }
 }
+
+short int verify_chance(int dropped_value, int chance)
+{
+    if(dropped_value <= chance)
+    {
+        return 1;
+    }
+    return 0;
+}

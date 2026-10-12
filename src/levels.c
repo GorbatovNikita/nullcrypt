@@ -4,15 +4,21 @@
 #include "errors.h"
 #include "utils.h"
 
-
 /*
-    Generates condition for given difficulty level
-    Returns the pointer to variable that should be freed after
+    Fills the value of given GameMode obj
 */
-GameMode *get_game_mode(int difficulty, char *title)
-{
-    GameMode *mode = malloc(sizeof(GameMode));
 
+int set_game_mode(int difficulty, char *title, GameMode *mode)
+{
+    if(difficulty <= 1)
+    {
+        return ERROR_BAD_DIFFICULTY;
+    }
+
+    if(!*title)
+    {
+        return ERROR_BAD_GAMEMODE_TITLE;
+    }
 
     int length = (difficulty + 1) * 4;
     int clear = 4;
@@ -27,7 +33,7 @@ GameMode *get_game_mode(int difficulty, char *title)
 
     mode->multiplier = 0.5 * difficulty;
 
-    return mode;
+    return EXIT_SUCCESS;
 }
 
 int *_get_levelmap_data(GameMode difficulty)
@@ -54,12 +60,11 @@ int *_get_levelmap_data(GameMode difficulty)
     return levelmap_data;
 }
 
-Level *generate_map(GameMode *difficulty)
+int generate_map(GameMode *difficulty, Level *start_node)
 {
     int length = difficulty->length;
     int *levelmap_data = _get_levelmap_data(*difficulty);
     
-    Level *start_node = malloc(sizeof(Level));
     Level *current_node = start_node;
 
     for(int i = 0; i < length; i++)
@@ -75,5 +80,5 @@ Level *generate_map(GameMode *difficulty)
 
     free(levelmap_data);
 
-    return start_node;
+    return EXIT_SUCCESS;
 }

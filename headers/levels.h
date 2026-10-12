@@ -30,9 +30,8 @@ typedef struct Level
     
 } Level;
 
-GameMode *get_game_mode(int difficulty, char *title);
+int get_game_mode(int difficulty, char *title, GameMode *game_mode);
 
-Level *generate_map(GameMode *difficulty);
-
+int generate_map(GameMode *difficulty, Level *start_node);
 
 #endif
