@@ -7,7 +7,6 @@
 
 int set_hero(Hero *hero, char name[11], HeroClass hero_class, int level)
 {
-
     if(!name)
     {
         return ERROR_BAD_HERO_NAME_DATA;
@@ -45,8 +44,6 @@ int set_hero(Hero *hero, char name[11], HeroClass hero_class, int level)
         
     }
     hero->load_capacity = HERO_BASE_LOAD_CAPACITY;
-
-    
 
     return EXIT_SUCCESS;
 }
