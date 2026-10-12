@@ -7,7 +7,7 @@ Level lengths that are associated with different difficulty types
 
 typedef struct GameMode
 {
-    char *title;
+    char title[11];
     int diffuculty;
     int length;
     int clear_rooms_quantity;
@@ -30,7 +30,7 @@ typedef struct Level
     
 } Level;
 
-int get_game_mode(int difficulty, char *title, GameMode *game_mode);
+int set_game_mode(int difficulty, char *title, GameMode *game_mode);
 
 int generate_map(GameMode *difficulty, Level *start_node);
 

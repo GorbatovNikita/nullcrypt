@@ -81,12 +81,23 @@ int set_enchantment_list(Enchantment *_enchantment_list)
     health.strength_buff = 0;
     health.title = " Здоровья";
     health.type = HEALTH;
+    
+    //setting blank enchantment
+
+    Enchantment blank;
+    blank.agility_buff = 0;
+    blank.health_buff = 0;
+    blank.strength_buff = 0;
+    blank.title = "";
+    blank.type = BLANK;
+    
 
     //setting list
 
     _enchantment_list[0] = strength;
     _enchantment_list[1] = agility;
     _enchantment_list[2] = health;
+    _enchantment_list[3] = blank;
 
     return 0;
 }
@@ -175,6 +186,39 @@ int set_random_item(Item *item, Enchantment *_enchantment_list, ItemClass *_item
 
     strcat(item->title, title);
 
-    return 0;
+    return EXIT_SUCCESS;
 
+}
+
+int set_item(Item *item, Enchantment enchantment, ItemClass item_class, Tier item_tier)
+{
+    char title[100] = "";
+
+    item->title[0] = '\0';
+    item->agility = (item_class.agility_buff + enchantment.agility_buff) * item_tier.multilier;
+    item->strength = (item_class.strength_buff + enchantment.strength_buff) * item_tier.multilier;
+    item->health = (item_class.health_buff + enchantment.health_buff) * item_tier.multilier;
+    item->tier = item_tier;
+
+    snprintf(title, sizeof(title), "%s%s%s",
+         item_tier.title, item_class.title, enchantment.title);
+
+    strcat(item->title, title);
+
+    return EXIT_SUCCESS;
+         
+}
+
+int set_base_items_list(Item *item, Enchantment *_enchantment_list, ItemClass *_item_class_list, Tier *_tier_list)
+{
+    //setting up a base sword
+    set_item(&item[0], _enchantment_list[3], _item_class_list[0], _tier_list[0]);
+
+    //setting up a base staff
+    set_item(&item[1], _enchantment_list[3], _item_class_list[1], _tier_list[0]);
+
+    //setting up a base bow
+    set_item(&item[2], _enchantment_list[3], _item_class_list[2], _tier_list[0]);
+
+    return EXIT_SUCCESS;
 }

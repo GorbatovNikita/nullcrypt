@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "levels.h"
 #include "errors.h"
@@ -8,7 +9,7 @@
     Fills the value of given GameMode obj
 */
 
-int set_game_mode(int difficulty, char *title, GameMode *mode)
+int set_game_mode(int difficulty, char title[11], GameMode *mode)
 {
     if(difficulty <= 1)
     {
@@ -25,7 +26,9 @@ int set_game_mode(int difficulty, char *title, GameMode *mode)
     int encounters = (length - 4) / 4 * 3;
     int treasures = (length - 4) / 4;
 
-    mode->title = title;
+    mode->title[0] = '\0';
+
+    strcat(mode->title, title);
     mode->length = length;
     mode->encounters_quantity = encounters;
     mode->clear_rooms_quantity = clear;

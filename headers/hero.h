@@ -20,6 +20,9 @@
 #define HERO_BASE_LOAD_CAPACITY 3
 
 
+#include "items.h"
+
+
 typedef enum HeroClass
 {
     SWORDSMAN,
@@ -29,20 +32,18 @@ typedef enum HeroClass
 
 typedef struct Hero
 {
-    char *name;
+    char name[11];
     HeroClass hero_class;
     int level;
     int strength;
     int agility;
     int health;
     int load_capacity;
+    Item *item_list;
 } Hero;
 
-Hero create_hero(
-    char *name,
-    HeroClass hero_class,
-    int level
-);
+int set_hero(Hero *hero, char *name, HeroClass hero_class, int level);
+int set_hero_inventory(Hero *hero, Item base_item_list[3]);
 
 
 

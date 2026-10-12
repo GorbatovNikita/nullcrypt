@@ -3,31 +3,29 @@
 #include <time.h>
 
 #include "items.h"
+#include "hero.h"
 
 int main(void)
 {
-    srand(time(NULL));
+  Item item_list[3];
+  Enchantment _enchantment_list[ENCHANTMENT_AMOUNT];
+  ItemClass _item_class_list[ITEM_CLASS_AMOUNT];
+  Tier _tier_list[TIER_AMOUNT];
 
-    Item item;
+  Hero hero;
 
-    ItemClass item_class_list[ITEM_CLASS_AMOUNT];
-    Enchantment enchantment_list[ENCHANTMENT_AMOUNT];
-    Tier tier_list[TIER_AMOUNT];
+  set_enchantment_list(_enchantment_list);
+  set_item_class_list(_item_class_list);
+  set_tier_list(_tier_list);
 
-    set_item_class_list(item_class_list);
-    set_enchantment_list(enchantment_list);
-    set_tier_list(tier_list);
+  set_base_items_list(item_list, _enchantment_list, _item_class_list, _tier_list);
 
-    while(item.tier.type != LEGENDARY)
-    {
+  set_hero(&hero, "Олежа", SWORDSMAN, 1);
+  set_hero_inventory(&hero, item_list);
 
-    set_random_item(&item, enchantment_list, item_class_list, tier_list);
+  printf("%s", hero.item_list[0].title);
 
-    printf("%s\n %f\n %f\n %f\n",
-           item.title, item.agility, item.strength, item.health);
-    }
-
-    return 0;
+  return 0;
 }
 
 /*
