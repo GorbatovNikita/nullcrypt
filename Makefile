@@ -1,3 +1,5 @@
+.PHONY: all, items, items_hero
+
 compiler = gcc
 headers = -I headers/
 
