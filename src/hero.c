@@ -7,7 +7,6 @@
 
 int set_hero(Hero *hero, char name[11], HeroClass hero_class, int level)
 {
-    hero->item_list = malloc(sizeof(Item) * HERO_BASE_LOAD_CAPACITY);
 
     if(!name)
     {
@@ -24,8 +23,6 @@ int set_hero(Hero *hero, char name[11], HeroClass hero_class, int level)
 
     hero->hero_class = hero_class;
     hero->level = level;
-
-    hero->item_list = malloc(sizeof(Item) * HERO_BASE_LOAD_CAPACITY);
 
     if(hero_class == MAGE)
     {
